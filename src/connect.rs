@@ -160,9 +160,8 @@ where
 
 fn interleave_addresses(addrs: Vec<SocketAddr>) -> VecDeque<SocketAddr> {
     let mut addrs = addrs.into_iter();
-    let first = match addrs.next() {
-        Some(first) => first,
-        None => return VecDeque::new(),
+    let Some(first) = addrs.next() else {
+        return VecDeque::new();
     };
 
     let first_is_ipv4 = first.is_ipv4();
